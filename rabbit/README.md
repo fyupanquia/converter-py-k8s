@@ -1,6 +1,6 @@
 >minikube service rabbitmq --url
-# http://127.0.0.1:60446
-# http://127.0.0.1:60447
+# http://127.0.0.1:{PORT}
+# http://127.0.0.1:{PORT}
 # CONTROL PANEL
 user: guest
 password: guest

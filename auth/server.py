@@ -5,11 +5,10 @@ from flask_mysqldb import MySQL
 server = Flask(__name__)
 
 # config
-server.config["MYSQL_HOST"] = "mysql"
+server.config["MYSQL_HOST"] = os.environ.get("MYSQL_HOST")
 server.config["MYSQL_USER"] = os.environ.get("MYSQL_USER")
 server.config["MYSQL_PASSWORD"] = os.environ.get("MYSQL_PASSWORD")
 server.config["MYSQL_DB"] = os.environ.get("MYSQL_DB")
-#server.config["MYSQL_PORT"] = os.environ.get("MYSQL_PORT")
 
 mysql = MySQL(server)
 
@@ -20,8 +19,6 @@ def login():
         return "missing credentials", 401
     # check db for username and password
     try:
-        print(auth)
-        print("cursing.....", ("mysql", os.environ.get("MYSQL_USER"),os.environ.get("MYSQL_PASSWORD"),os.environ.get("MYSQL_DB"),os.environ.get("MYSQL_PORT")))
         cur = mysql.connection.cursor()
         res = cur.execute(
             "SELECT email, password FROM user WHERE email=%s", (auth.username,)
@@ -46,18 +43,15 @@ def login():
 @server.route("/validate", methods=["POST"])
 def validate():
     encoded_jwt = request.headers["Authorization"]
-    print("111111111111")
     if not encoded_jwt:
         return "missing credentials", 401
-    print("encoded_jwt: ", encoded_jwt)
+    print("encoded jwt: ", encoded_jwt)
     encoded_jwt = encoded_jwt.split(" ")[1]
-    print("encoded_jwt: ", encoded_jwt)
     try:
-        print("JWT_SECRET: ", os.environ.get("JWT_SECRET"))
         decoded = jwt.decode(
             encoded_jwt, os.environ.get("JWT_SECRET"), algorithms=["HS256"]
         )
-        print("decoded: ", decoded)
+        print("decoded jwt: ", decoded)
     except:
         return "not authorized", 403
 

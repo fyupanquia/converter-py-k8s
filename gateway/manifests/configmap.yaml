@@ -4,3 +4,9 @@ metadata:
   name: gateway-configmap
 data:
   AUTH_SVC_ADDRESS: "auth:5000"
+  VIDEO_QUEUE: "video"
+  MONGO_HOST: "mongo"
+  MONGO_PORT: "27017"
+  MONGO_USER: "adminuser"
+  MONGO_DB_VIDEOS: "videos"
+  MONGO_DB_MP3S: "mp3s"

@@ -1,0 +1,353 @@
+{
+	"info": {
+		"_postman_id": "d1bf5be9-84c6-462a-be98-f40bb841ed4d",
+		"name": "py-converter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2530523"
+	},
+	"item": [
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set('TOKEN', responseBody);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "fyupanquia@outlook.com",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/login",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "upload",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/I:/prjs/python/auth-py/big.kitty.mp4"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{HOST}}/upload",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"upload"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "upload:no auth",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/CMB/Downloads/puppy.mp4"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:58568/upload?",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "58568",
+							"path": [
+								"upload"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null
+								}
+							]
+						}
+					},
+					"status": "UNAUTHORIZED",
+					"code": 401,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "19"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.0.3 Python/3.10.9"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 20 Feb 2023 00:54:02 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "missing credentials"
+				},
+				{
+					"name": "upload:success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/I:/prjs/python/auth-py/big.kitty.mp4"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:54269/upload",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "54269",
+							"path": [
+								"upload"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "8"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.0.3 Python/3.10.10"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 05 Mar 2023 00:56:25 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "success!"
+				}
+			]
+		},
+		{
+			"name": "download",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/download?fid=6406a132355a734d346b84ae",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"download"
+					],
+					"query": [
+						{
+							"key": "fid",
+							"value": "6406a132355a734d346b84ae"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "upload:no auth",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/CMB/Downloads/puppy.mp4"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:58568/upload?",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "58568",
+							"path": [
+								"upload"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null
+								}
+							]
+						}
+					},
+					"status": "UNAUTHORIZED",
+					"code": 401,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "19"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.0.3 Python/3.10.9"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 20 Feb 2023 00:54:02 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "missing credentials"
+				},
+				{
+					"name": "upload:success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/I:/prjs/python/auth-py/big.kitty.mp4"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:54269/upload",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "54269",
+							"path": [
+								"upload"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "8"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.0.3 Python/3.10.10"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 05 Mar 2023 00:56:25 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "success!"
+				}
+			]
+		}
+	]
+}

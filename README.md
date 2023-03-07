@@ -29,7 +29,6 @@
 # SHOW THE IP AND PORT OF SPECIFIC SERVICE
 > minikube service <service-name> --url
 
-
 # APPLY MANIFESTS
 > cd manifests
 >  kubectl apply -f ./
@@ -52,7 +51,6 @@
 # GET STORAGES
 > kubectl get storageclasses --all-namespaces
 
-
 # SHELL SPECIFI Pod
 > kubectl exec --stdin --tty <pod> -- /bin/bash
 
@@ -71,7 +69,3 @@
 # PING
 >apt update
 >apt install iputils-ping
-
-4:06:32
-https://www.youtube.com/watch?v=hmkF77F9TLw
-https://github.com/selikapro/microservices-python

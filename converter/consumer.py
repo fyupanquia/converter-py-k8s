@@ -5,11 +5,11 @@ from convert import to_mp3
 
 
 def main():
-    #client = MongoClient("host.minikube.internal", 27017)
-    #client = MongoClient("mongodb+srv://adminuser:password123@mongo/?retryWrites=true&w=majority")
-    #client = MongoClient("mongodb://mongo")
-    #client = MongoClient("mongodb://adminuser:password123@mongo:27017")
-    client = MongoClient("mongodb://adminuser:password123@mongo:27017/?authSource=admin&retryWrites=true&w=majority")
+    MONGO_HOST = os.environ.get("MONGO_HOST")
+    MONGO_PORT = os.environ.get("MONGO_PORT")
+    MONGO_USER = os.environ.get("MONGO_USER")
+    MONGO_PASSWORD = os.environ.get("MONGO_PASSWORD")
+    client = MongoClient(f'mongodb://{MONGO_USER}:{MONGO_PASSWORD}@{MONGO_HOST}:{MONGO_PORT}/?authSource=admin&retryWrites=true&w=majority')
     db_videos = client.videos
     db_mp3s = client.mp3s
     # gridfs

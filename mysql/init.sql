@@ -1,9 +1,4 @@
-CREATE USER 'auth_user'@'localhost' IDENTIFIED BY 'my-secret-pw';
-
 CREATE DATABASE db_auth;
-
-GRANT ALL PRIVILEGES ON auth.* TO 'auth_user'@'localhost';
-
 USE db_auth;
 
 CREATE TABLE user(

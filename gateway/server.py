@@ -8,12 +8,16 @@ from bson.objectid import ObjectId
 
 server = Flask(__name__)
 
-#mongo_video = PyMongo(server, uri="mongodb://host.minikube.internal:27017/videos")
-#mongo_video = PyMongo(server, uri="mongodb+srv://adminuser:password123@mongo/videos?retryWrites=true&w=majority")
-mongo_video = PyMongo(server, uri="mongodb://adminuser:password123@mongo:27017/videos?authSource=admin&retryWrites=true&w=majority")
+MONGO_HOST = os.environ.get("MONGO_HOST")
+MONGO_PORT = os.environ.get("MONGO_PORT")
+MONGO_USER = os.environ.get("MONGO_USER")
+MONGO_PASSWORD = os.environ.get("MONGO_PASSWORD")
 
-#mongo_mp3 = PyMongo(server, uri="mongodb://host.minikube.internal:27017/mp3s")
-mongo_mp3 = PyMongo(server, uri="mongodb://adminuser:password123@mongo:27017/mp3s?authSource=admin&retryWrites=true&w=majority")
+MONGO_DB_VIDEOS = os.environ.get("MONGO_DB_VIDEOS")
+MONGO_DB_MP3S = os.environ.get("MONGO_DB_MP3S")
+
+mongo_video = PyMongo(server, uri=f'mongodb://{MONGO_USER}:{MONGO_PASSWORD}@{MONGO_HOST}:{MONGO_PORT}/{MONGO_DB_VIDEOS}?authSource=admin&retryWrites=true&w=majority')
+mongo_mp3 = PyMongo(server, uri=f'mongodb://{MONGO_USER}:{MONGO_PASSWORD}@{MONGO_HOST}:{MONGO_PORT}/{MONGO_DB_MP3S}?authSource=admin&retryWrites=true&w=majority')
 
 fs_videos = gridfs.GridFS(mongo_video.db)
 fs_mp3s = gridfs.GridFS(mongo_mp3.db)
@@ -38,15 +42,13 @@ def upload():
 
     if err:
         return err
-    print("access: ", access)
     access = json.loads(access)
-    print("access: ", access)
     if access["admin"]:
         if len(request.files) > 1 or len(request.files) < 1:
             return "exactly 1 file required", 400
 
         for _, f in request.files.items():
-            print("upload called: ")
+            print("util.upload called: ")
             err = util.upload(f, fs_videos, channel, access)
 
             if err:
